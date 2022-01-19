@@ -18,3 +18,4 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post("/user", "UserController@store");
+$router->get("/user/{limit}/{offset}", "UserController@getUserList");

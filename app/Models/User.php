@@ -11,6 +11,7 @@ use Laravel\Lumen\Auth\Authorizable;
 
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
+    use HasFactory;
     use Authenticatable, Authorizable, HasFactory;
 
     protected $table = "users";
@@ -21,7 +22,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username'
+        'name', 'password', 'username'
     ];
 
     /**
