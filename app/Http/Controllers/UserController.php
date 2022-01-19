@@ -66,7 +66,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $user = User::findOrNew($id);
+            return \response()->json($user);
+        } catch (Throwable $t) {
+            \response()->json([
+                "error" => true,
+                "message" => $t->getMessage()
+            ], \http_response_code());
+        }
     }
 
     /**
@@ -101,5 +109,18 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getUserList($limit, $offset)
+    {
+        try {
+            $user = User::limit($limit)->offset($offset)->get();
+            return \response()->json($user);
+        } catch (Throwable $t) {
+            \response()->json([
+                "error" => true,
+                "message" => $t->getMessage()
+            ], \http_response_code());
+        }
     }
 }
