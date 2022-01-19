@@ -97,7 +97,26 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            "username" => "required|string|min:3",
+            "password" => "required|string|min:7",
+            "name" => "required|string|min:3",
+        ]);
+
+        try {
+            $user = User::find($id);
+            $user->username = $request->username;
+            $user->password = \app("hash")->make($request->password);
+            $user->name = $request->name;
+            $user->save();
+
+            return \response()->json([], \http_response_code());
+        } catch (Throwable $t) {
+            return \response()->json([
+                "error" => true,
+                "message" => $t->getMessage()
+            ], \http_response_code());
+        }
     }
 
     /**
