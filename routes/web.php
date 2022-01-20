@@ -18,6 +18,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post("/user", "UserController@store");
+$router->get("/all-user-count", "UserController@getAllUserCount");
 $router->get("/user/{limit}/{offset}", "UserController@getUserList");
 $router->get("/user/{id}", "UserController@show");
 $router->put("/user/{id}", "UserController@update");

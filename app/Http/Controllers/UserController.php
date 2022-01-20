@@ -150,4 +150,17 @@ class UserController extends Controller
             ], \http_response_code());
         }
     }
+
+    public function getAllUserCount()
+    {
+        try {
+            $user = User::all()->count();
+            return \response()->json($user);
+        } catch (Throwable $t) {
+            \response()->json([
+                "error" => true,
+                "message" => $t->getMessage()
+            ], \http_response_code());
+        }
+    }
 }
